@@ -3,20 +3,28 @@ info:
   # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: CleanPro Cleaning Services API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
-    description: Health operations
+  - name: auth
+  - name: settings
+  - name: slides
+  - name: services
+  - name: reviews
+  - name: contact
+  - name: team
+  - name: about
+  - name: upload
+
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +32,462 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /auth/login:
+    post:
+      operationId: adminLogin
+      tags: [auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginInput"
+      responses:
+        "200":
+          description: Logged in
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthUser"
+        "401":
+          description: Invalid credentials
+
+  /auth/logout:
+    post:
+      operationId: adminLogout
+      tags: [auth]
+      responses:
+        "200":
+          description: Logged out
+
+  /auth/me:
+    get:
+      operationId: getAuthMe
+      tags: [auth]
+      responses:
+        "200":
+          description: Current user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthUser"
+        "401":
+          description: Not authenticated
+
+  /settings:
+    get:
+      operationId: getSettings
+      tags: [settings]
+      responses:
+        "200":
+          description: Site settings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Settings"
+    put:
+      operationId: updateSettings
+      tags: [settings]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SettingsInput"
+      responses:
+        "200":
+          description: Updated settings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Settings"
+
+  /slides:
+    get:
+      operationId: listSlides
+      tags: [slides]
+      responses:
+        "200":
+          description: All slides
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Slide"
+    post:
+      operationId: createSlide
+      tags: [slides]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SlideInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Slide"
+
+  /slides/reorder:
+    put:
+      operationId: reorderSlides
+      tags: [slides]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReorderInput"
+      responses:
+        "200":
+          description: Reordered
+
+  /slides/{id}:
+    put:
+      operationId: updateSlide
+      tags: [slides]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SlideInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Slide"
+    delete:
+      operationId: deleteSlide
+      tags: [slides]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Deleted
+
+  /services:
+    get:
+      operationId: listServices
+      tags: [services]
+      responses:
+        "200":
+          description: All services
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Service"
+    post:
+      operationId: createService
+      tags: [services]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServiceInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Service"
+
+  /services/reorder:
+    put:
+      operationId: reorderServices
+      tags: [services]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReorderInput"
+      responses:
+        "200":
+          description: Reordered
+
+  /services/{id}:
+    put:
+      operationId: updateService
+      tags: [services]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ServiceInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Service"
+    delete:
+      operationId: deleteService
+      tags: [services]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Deleted
+
+  /reviews:
+    get:
+      operationId: listReviews
+      tags: [reviews]
+      parameters:
+        - name: all
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Reviews
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Review"
+    post:
+      operationId: submitReview
+      tags: [reviews]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReviewInput"
+      responses:
+        "201":
+          description: Submitted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Review"
+
+  /reviews/{id}:
+    put:
+      operationId: updateReview
+      tags: [reviews]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReviewUpdate"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Review"
+    delete:
+      operationId: deleteReview
+      tags: [reviews]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Deleted
+
+  /contact:
+    get:
+      operationId: listContacts
+      tags: [contact]
+      responses:
+        "200":
+          description: Contact submissions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ContactSubmission"
+    post:
+      operationId: submitContact
+      tags: [contact]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContactInput"
+      responses:
+        "201":
+          description: Submitted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContactSubmission"
+
+  /contact/{id}:
+    delete:
+      operationId: deleteContact
+      tags: [contact]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Deleted
+
+  /team:
+    get:
+      operationId: listTeamMembers
+      tags: [team]
+      responses:
+        "200":
+          description: Team members
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TeamMember"
+    post:
+      operationId: createTeamMember
+      tags: [team]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TeamMemberInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TeamMember"
+
+  /team/reorder:
+    put:
+      operationId: reorderTeamMembers
+      tags: [team]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReorderInput"
+      responses:
+        "200":
+          description: Reordered
+
+  /team/{id}:
+    put:
+      operationId: updateTeamMember
+      tags: [team]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TeamMemberInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TeamMember"
+    delete:
+      operationId: deleteTeamMember
+      tags: [team]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Deleted
+
+  /about:
+    get:
+      operationId: getAbout
+      tags: [about]
+      responses:
+        "200":
+          description: About section
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/About"
+    put:
+      operationId: updateAbout
+      tags: [about]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AboutInput"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/About"
+
+
 components:
   schemas:
     HealthStatus:
@@ -31,6 +495,374 @@ components:
       properties:
         status:
           type: string
-      required:
-        - status
+      required: [status]
 
+    AuthUser:
+      type: object
+      properties:
+        username:
+          type: string
+      required: [username]
+
+    LoginInput:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      required: [username, password]
+
+    NavItem:
+      type: object
+      properties:
+        label:
+          type: string
+        href:
+          type: string
+        visible:
+          type: boolean
+      required: [label, href, visible]
+
+    SocialLink:
+      type: object
+      properties:
+        platform:
+          type: string
+        url:
+          type: string
+      required: [platform, url]
+
+    Settings:
+      type: object
+      properties:
+        id:
+          type: integer
+        siteName:
+          type: string
+        primaryColor:
+          type: string
+        secondaryColor:
+          type: string
+        fontFamily:
+          type: string
+        faviconUrl:
+          type: ["string", "null"]
+        logoUrl:
+          type: ["string", "null"]
+        contactInfo:
+          type: ["string", "null"]
+        whatsappNumber:
+          type: ["string", "null"]
+        instagramUrl:
+          type: ["string", "null"]
+        businessAddress:
+          type: ["string", "null"]
+        metaTitle:
+          type: ["string", "null"]
+        metaDescription:
+          type: ["string", "null"]
+        seoKeywords:
+          type: ["string", "null"]
+        footerText:
+          type: ["string", "null"]
+        navItems:
+          type: array
+          items:
+            $ref: "#/components/schemas/NavItem"
+        socialLinks:
+          type: array
+          items:
+            $ref: "#/components/schemas/SocialLink"
+        sheetsScriptUrl:
+          type: ["string", "null"]
+        sheetsSpreadsheetId:
+          type: ["string", "null"]
+        sheetsSheetName:
+          type: ["string", "null"]
+      required: [id, siteName, primaryColor, secondaryColor, fontFamily, navItems, socialLinks]
+
+    SettingsInput:
+      type: object
+      properties:
+        siteName:
+          type: string
+        primaryColor:
+          type: string
+        secondaryColor:
+          type: string
+        fontFamily:
+          type: string
+        faviconUrl:
+          type: ["string", "null"]
+        logoUrl:
+          type: ["string", "null"]
+        contactInfo:
+          type: ["string", "null"]
+        whatsappNumber:
+          type: ["string", "null"]
+        instagramUrl:
+          type: ["string", "null"]
+        businessAddress:
+          type: ["string", "null"]
+        metaTitle:
+          type: ["string", "null"]
+        metaDescription:
+          type: ["string", "null"]
+        seoKeywords:
+          type: ["string", "null"]
+        footerText:
+          type: ["string", "null"]
+        navItems:
+          type: array
+          items:
+            $ref: "#/components/schemas/NavItem"
+        socialLinks:
+          type: array
+          items:
+            $ref: "#/components/schemas/SocialLink"
+        sheetsScriptUrl:
+          type: ["string", "null"]
+        sheetsSpreadsheetId:
+          type: ["string", "null"]
+        sheetsSheetName:
+          type: ["string", "null"]
+
+    Slide:
+      type: object
+      properties:
+        id:
+          type: integer
+        heading:
+          type: string
+        description:
+          type: ["string", "null"]
+        imageUrl:
+          type: string
+        overlayOpacity:
+          type: number
+        sortOrder:
+          type: integer
+        autoplay:
+          type: boolean
+        autoplaySpeed:
+          type: integer
+        createdAt:
+          type: string
+      required: [id, heading, imageUrl, overlayOpacity, sortOrder, autoplay, autoplaySpeed, createdAt]
+
+    SlideInput:
+      type: object
+      properties:
+        heading:
+          type: string
+        description:
+          type: ["string", "null"]
+        imageUrl:
+          type: string
+        overlayOpacity:
+          type: number
+        sortOrder:
+          type: integer
+        autoplay:
+          type: boolean
+        autoplaySpeed:
+          type: integer
+      required: [heading, imageUrl]
+
+    Service:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: ["string", "null"]
+        iconUrl:
+          type: ["string", "null"]
+        beforeImageUrl:
+          type: ["string", "null"]
+        afterImageUrl:
+          type: ["string", "null"]
+        sortOrder:
+          type: integer
+        createdAt:
+          type: string
+      required: [id, title, sortOrder, createdAt]
+
+    ServiceInput:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: ["string", "null"]
+        iconUrl:
+          type: ["string", "null"]
+        beforeImageUrl:
+          type: ["string", "null"]
+        afterImageUrl:
+          type: ["string", "null"]
+        sortOrder:
+          type: integer
+      required: [title]
+
+    Review:
+      type: object
+      properties:
+        id:
+          type: integer
+        customerName:
+          type: string
+        rating:
+          type: integer
+        comment:
+          type: string
+        status:
+          type: string
+        pinned:
+          type: boolean
+        hidden:
+          type: boolean
+        createdAt:
+          type: string
+      required: [id, customerName, rating, comment, status, pinned, hidden, createdAt]
+
+    ReviewInput:
+      type: object
+      properties:
+        customerName:
+          type: string
+        rating:
+          type: integer
+        comment:
+          type: string
+      required: [customerName, rating, comment]
+
+    ReviewUpdate:
+      type: object
+      properties:
+        status:
+          type: string
+        pinned:
+          type: boolean
+        hidden:
+          type: boolean
+        customerName:
+          type: string
+        rating:
+          type: integer
+        comment:
+          type: string
+
+    ContactSubmission:
+      type: object
+      properties:
+        id:
+          type: integer
+        fullName:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+        serviceRequired:
+          type: ["string", "null"]
+        message:
+          type: ["string", "null"]
+        createdAt:
+          type: string
+      required: [id, fullName, phone, email, createdAt]
+
+    ContactInput:
+      type: object
+      properties:
+        fullName:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+        serviceRequired:
+          type: ["string", "null"]
+        message:
+          type: ["string", "null"]
+      required: [fullName, phone, email]
+
+    TeamMember:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        position:
+          type: string
+        description:
+          type: ["string", "null"]
+        photoUrl:
+          type: ["string", "null"]
+        sortOrder:
+          type: integer
+        createdAt:
+          type: string
+      required: [id, name, position, sortOrder, createdAt]
+
+    TeamMemberInput:
+      type: object
+      properties:
+        name:
+          type: string
+        position:
+          type: string
+        description:
+          type: ["string", "null"]
+        photoUrl:
+          type: ["string", "null"]
+        sortOrder:
+          type: integer
+      required: [name, position]
+
+    About:
+      type: object
+      properties:
+        id:
+          type: integer
+        introduction:
+          type: ["string", "null"]
+        mission:
+          type: ["string", "null"]
+        vision:
+          type: ["string", "null"]
+        experience:
+          type: ["string", "null"]
+      required: [id]
+
+    AboutInput:
+      type: object
+      properties:
+        introduction:
+          type: ["string", "null"]
+        mission:
+          type: ["string", "null"]
+        vision:
+          type: ["string", "null"]
+        experience:
+          type: ["string", "null"]
+
+    ReorderInput:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+      required: [ids]
+
+    UploadResult:
+      type: object
+      properties:
+        url:
+          type: string
+      required: [url]

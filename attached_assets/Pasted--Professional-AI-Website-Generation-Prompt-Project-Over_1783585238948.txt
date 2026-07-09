@@ -1,0 +1,473 @@
+# Professional AI Website Generation Prompt
+
+## Project Overview
+
+Create a **premium, modern, flat, responsive cleaning services website** for small to medium cleaning businesses.
+
+The design should feel premium, trustworthy, elegant, and conversion-focused.
+
+**Theme**
+
+- Modern
+- Flat Design
+- Light Theme
+- Premium UI
+- White background
+- Soft shadows
+- Rounded corners (12–16px)
+- Spacious layout
+- Smooth animations
+- Glassmorphism only where appropriate (very subtle)
+- Fast loading
+- Fully responsive (Desktop, Tablet, Mobile)
+
+Color Palette
+
+- Primary: #0074FC
+- Secondary: #000C26
+- Background: #FFFFFF
+- Accent: #F6F9FC
+
+Typography
+
+- Clean modern font (Inter, Poppins, or Manrope)
+- Large headings
+- Comfortable spacing
+- Professional hierarchy
+
+---
+
+# Main Website Structure
+
+The homepage should contain **ONLY** the following sections in this exact order.
+
+---
+
+# 1. Navigation Bar
+
+Sticky navbar.
+
+Left side
+
+- Company Logo
+
+Right side
+
+- Home
+- Services
+- Reviews
+- Contact
+- About
+
+Navbar should be fully customizable from the admin panel.
+
+Admin should be able to
+
+- Upload/change logo
+- Change navigation labels
+- Hide/show navigation items
+- Change logo anytime
+
+---
+
+# 2. Hero Carousel
+
+This is the first thing visitors see.
+
+Create a beautiful full-width image carousel.
+
+Images should represent
+
+- Professional cleaning staff
+- Modern residential homes
+- Luxury kitchens
+- Living rooms
+- Office cleaning
+- Deep cleaning
+- Happy customers
+- Eco-friendly cleaning
+
+Images should have a dark overlay so text remains readable.
+
+Each slide contains
+
+Headline
+
+Short description
+
+NO text-heavy design.
+
+Only two CTA buttons placed prominently on top of the carousel.
+
+### Button 1
+
+Instagram
+
+Color
+
+Instagram gradient
+
+Example
+
+Pink → Purple → Orange
+
+Rounded pill button.
+
+### Button 2
+
+WhatsApp
+
+Color
+
+WhatsApp Green
+
+Rounded pill button.
+
+Buttons should have hover animations.
+
+Admin Panel Controls
+
+- Add unlimited slides
+- Delete slides
+- Reorder slides
+- Upload images
+- Change heading
+- Change description
+- Change Instagram URL
+- Change WhatsApp Number
+- Enable/Disable autoplay
+- Change autoplay speed
+- Change overlay opacity
+
+---
+
+# 3. Services Section
+
+Modern card layout.
+
+Each service card contains
+
+- Circular icon/image
+- Service title
+- Short description
+
+Every service must include its own
+
+## Before & After Image Slider
+
+Each service has
+
+Before Image
+
+⇄ Slider
+
+After Image
+
+The user can drag the slider to compare.
+
+Examples
+
+- House Cleaning
+- Office Cleaning
+- Deep Cleaning
+- Move In Cleaning
+- Move Out Cleaning
+- Carpet Cleaning
+- Window Cleaning
+- Airbnb Cleaning
+
+Admin Controls
+
+- Add unlimited services
+- Upload service icon
+- Upload before image
+- Upload after image
+- Edit title
+- Edit description
+- Reorder services
+- Delete services
+
+---
+
+# 4. Customer Reviews
+
+Beautiful testimonial section.
+
+Customers can
+
+- Give Rating
+- Write Review
+- Submit Review
+
+Each review contains
+
+- Customer Name
+- Star Rating
+- Comment
+- Date
+
+Admin can
+
+- Approve review
+- Reject review
+- Delete review
+- Edit review
+- Pin review
+- Hide review
+
+Display reviews as elegant cards.
+
+---
+
+# 5. Contact Form
+
+Premium contact section.
+
+Fields
+
+- Full Name
+- Phone Number
+- Email Address
+- Service Required
+- Detailed Message
+
+Large Submit button.
+
+Validation
+
+- Required fields
+- Email validation
+- Phone validation
+
+After successful submission
+
+Show success message.
+
+---
+
+## Google Sheets Integration
+
+When the form is submitted
+
+Automatically save
+
+- Name
+- Phone
+- Email
+- Selected Service
+- Message
+- Submission Date
+- Submission Time
+
+into Google Sheets.
+
+---
+
+# Google Sheets Settings
+
+The Google Sheet configuration must NOT be hardcoded.
+
+Instead,
+
+Create a dedicated Google Sheets settings page inside the Admin Panel.
+
+Admin can update
+
+- Google Spreadsheet ID
+- Sheet Name
+- Google Apps Script URL
+- API configuration (if applicable)
+- Authentication details (if required)
+
+Admin should be able to switch to a completely different Google Sheet at any time without modifying code.
+
+All future form submissions must automatically use the newly configured Google Sheet.
+
+---
+
+# 6. About Us Section
+
+Contains
+
+Short company introduction.
+
+Mission
+
+Vision
+
+Experience
+
+Below that,
+
+## Team Members
+
+Beautiful cards.
+
+Each card contains
+
+- Profile Photo
+- Name
+- Position
+- Short Description
+
+Cards should have subtle hover animation.
+
+Admin Controls
+
+- Add unlimited members
+- Upload image
+- Change name
+- Change role
+- Edit description
+- Delete member
+- Reorder members
+
+---
+
+# Footer
+
+Minimal footer.
+
+Contains
+
+- Copyright
+- Company Name
+- Social Icons
+- Privacy Policy
+- Terms
+
+Everything editable.
+
+---
+
+# Admin Panel
+
+Create a professional admin dashboard.
+
+Secure Login.
+
+Dashboard Overview
+
+Sidebar Navigation
+
+- Dashboard
+- Website Settings
+- Hero Carousel
+- Services
+- Before & After Images
+- Reviews
+- Contact Form
+- Google Sheets Settings
+- Team Members
+- About Section
+- Navigation
+- Footer
+- Users (Optional)
+
+Every section should support complete CRUD operations.
+
+Admin should be able to customize every visible piece of content on the website without writing code.
+
+---
+
+# Website Settings
+
+Allow admin to change
+
+- Logo
+- Website Name
+- Primary Color
+- Secondary Color
+- Fonts
+- Favicon
+- Contact Information
+- WhatsApp Number
+- Instagram URL
+- Business Address
+- Meta Title
+- Meta Description
+- SEO Keywords
+
+---
+
+# Performance
+
+Website must
+
+- Load extremely fast
+- Be fully responsive
+- Be SEO optimized
+- Have semantic HTML
+- Use lazy loading
+- Optimize images
+- Follow accessibility best practices
+
+---
+
+# Animations
+
+Use smooth, premium animations.
+
+Examples
+
+- Fade In
+- Slide Up
+- Hover Lift
+- Button Ripple
+- Image Zoom
+- Smooth Carousel Transition
+
+Animations should feel elegant and never excessive.
+
+---
+
+# Technology Stack
+
+Frontend
+
+- React
+- Vite
+- Tailwind CSS
+- Framer Motion
+
+Backend
+
+- Supabase
+
+Database
+
+- Supabase PostgreSQL
+
+Authentication
+
+- Supabase Auth (Admin Login)
+
+Storage
+
+- Supabase Storage
+
+Google Sheets
+
+- Google Apps Script Integration
+
+Deployment
+
+- Vercel
+
+---
+
+# Overall Design Goal
+
+The final product should feel like a premium SaaS-quality business website rather than a generic cleaning template.
+
+The interface should immediately communicate:
+
+- Trust
+- Professionalism
+- Reliability
+- Premium Quality
+- Cleanliness
+- Modern Design
+- High Conversion Potential
+
+Every section, component, image, animation, spacing, and interaction should reflect a polished, production-ready experience suitable for a real cleaning services company.
