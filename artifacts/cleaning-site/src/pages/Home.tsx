@@ -164,7 +164,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <section id="hero" className="w-full">
-        <HeroCarousel slides={slides?.length ? slides : defaultHeroSlides} />
+        <HeroCarousel slides={slides?.length ? slides : defaultHeroSlides} instagramUrl={settings?.instagramUrl ?? ''} />
       </section>
 
       {/* Services Section */}

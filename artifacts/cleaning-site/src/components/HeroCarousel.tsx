@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Instagram } from 'lucide-react';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 import type { Slide } from '@workspace/api-client-react';
 
 interface HeroCarouselProps {
   slides: Slide[];
+  instagramUrl?: string;
 }
 
-export function HeroCarousel({ slides }: HeroCarouselProps) {
+export function HeroCarousel({ slides, instagramUrl }: HeroCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToNext = useCallback(() => {
@@ -85,10 +86,16 @@ export function HeroCarousel({ slides }: HeroCarouselProps) {
                       Book via WhatsApp
                     </Button>
                   </a>
-                  <a href="#services" className="group">
-                    <Button size="lg" variant="outline" className="rounded-full px-8 border-white text-white hover:bg-white/10 backdrop-blur-sm transition-all hover:-translate-y-1 w-full sm:w-auto h-14 text-lg">
-                      View Services
-                    </Button>
+                  <a
+                    href={instagramUrl || '#'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group"
+                  >
+                    <button className="flex items-center gap-2.5 rounded-full px-8 h-14 text-lg font-semibold text-white shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl w-full sm:w-auto" style={{ background: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)' }}>
+                      <Instagram className="w-5 h-5" />
+                      Follow on Instagram
+                    </button>
                   </a>
                 </div>
               </div>
