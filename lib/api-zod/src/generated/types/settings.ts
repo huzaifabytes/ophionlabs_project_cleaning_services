@@ -42,4 +42,6 @@ export interface Settings {
   sheetsSpreadsheetId?: string | null;
   /** @nullable */
   sheetsSheetName?: string | null;
+  /** @nullable */
+  reviewsScriptUrl?: string | null;
 }

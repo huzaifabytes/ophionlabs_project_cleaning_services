@@ -45,7 +45,7 @@ router.put("/team/:id", requireAdmin, async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
     const [member] = await db.update(teamMembersTable).set(req.body).where(eq(teamMembersTable.id, id)).returning();
-    if (!member) return res.status(404).json({ error: "Not found" });
+    if (!member) { res.status(404).json({ error: "Not found" }); return; }
     res.json(member);
   } catch (err) {
     req.log.error(err);

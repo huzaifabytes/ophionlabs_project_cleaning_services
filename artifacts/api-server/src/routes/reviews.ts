@@ -1,6 +1,6 @@
 import { Router } from "express";
 import type { Request, Response } from "express";
-import { db, reviewsTable } from "@workspace/db";
+import { db, reviewsTable, settingsTable } from "@workspace/db";
 import { desc, eq, and, or } from "drizzle-orm";
 import { requireAdmin } from "../middlewares/auth.js";
 
@@ -33,6 +33,30 @@ router.post("/reviews", async (req: Request, res: Response) => {
       comment,
       status: "pending",
     }).returning();
+
+    // Forward to Google Sheets if a reviews script URL is configured
+    try {
+      const [s] = await db.select().from(settingsTable).limit(1);
+      if (s?.reviewsScriptUrl) {
+        const now = new Date();
+        await fetch(s.reviewsScriptUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            type: "review",
+            name: customerName,
+            rating,
+            comment: comment || "",
+            status: "pending",
+            date: now.toLocaleDateString(),
+            time: now.toLocaleTimeString(),
+          }),
+        });
+      }
+    } catch {
+      // Silently ignore Sheets errors — review is already saved to DB
+    }
+
     res.status(201).json(review);
   } catch (err) {
     req.log.error(err);
@@ -44,7 +68,7 @@ router.put("/reviews/:id", requireAdmin, async (req: Request, res: Response) => 
   try {
     const id = Number(req.params.id);
     const [review] = await db.update(reviewsTable).set(req.body).where(eq(reviewsTable.id, id)).returning();
-    if (!review) return res.status(404).json({ error: "Not found" });
+    if (!review) { res.status(404).json({ error: "Not found" }); return; }
     res.json(review);
   } catch (err) {
     req.log.error(err);

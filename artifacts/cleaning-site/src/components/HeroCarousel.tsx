@@ -21,13 +21,13 @@ export function HeroCarousel({ slides, instagramUrl }: HeroCarouselProps) {
   }, [slides.length]);
 
   useEffect(() => {
-    if (!slides.length) return;
+    if (!slides.length) return undefined;
     const currentSlide = slides[currentIndex];
-    
     if (currentSlide.autoplay) {
       const timer = setInterval(goToNext, currentSlide.autoplaySpeed || 5000);
       return () => clearInterval(timer);
     }
+    return undefined;
   }, [currentIndex, slides, goToNext]);
 
   if (!slides.length) return null;

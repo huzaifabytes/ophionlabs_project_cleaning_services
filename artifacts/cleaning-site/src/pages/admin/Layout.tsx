@@ -1,8 +1,9 @@
 import React from 'react';
 import { Route, Switch, useLocation } from 'wouter';
 import { 
-  useGetAuthMe, 
-  useAdminLogout 
+  useGetAuthMe,
+  useAdminLogout,
+  getGetAuthMeQueryKey,
 } from '@workspace/api-client-react';
 import { useQueryClient } from '@tanstack/react-query';
 import { 
@@ -47,6 +48,7 @@ export default function AdminLayout() {
   const queryClient = useQueryClient();
   const { data: user, isError, isLoading } = useGetAuthMe({
     query: {
+      queryKey: getGetAuthMeQueryKey(),
       retry: false,
     }
   });

@@ -45,7 +45,7 @@ router.put("/services/:id", requireAdmin, async (req: Request, res: Response) =>
   try {
     const id = Number(req.params.id);
     const [service] = await db.update(servicesTable).set(req.body).where(eq(servicesTable.id, id)).returning();
-    if (!service) return res.status(404).json({ error: "Not found" });
+    if (!service) { res.status(404).json({ error: "Not found" }); return; }
     res.json(service);
   } catch (err) {
     req.log.error(err);

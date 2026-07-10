@@ -32,4 +32,5 @@ export const settingsTable = pgTable("settings", {
   sheetsScriptUrl: text("sheets_script_url"),
   sheetsSpreadsheetId: text("sheets_spreadsheet_id"),
   sheetsSheetName: text("sheets_sheet_name"),
+  reviewsScriptUrl: text("reviews_script_url"),
 });

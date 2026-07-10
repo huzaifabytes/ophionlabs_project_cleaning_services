@@ -61,7 +61,8 @@ export const GetSettingsResponse = zod.object({
 })),
   "sheetsScriptUrl": zod.string().nullish(),
   "sheetsSpreadsheetId": zod.string().nullish(),
-  "sheetsSheetName": zod.string().nullish()
+  "sheetsSheetName": zod.string().nullish(),
+  "reviewsScriptUrl": zod.string().nullish()
 })
 
 
@@ -91,7 +92,8 @@ export const UpdateSettingsBody = zod.object({
 })).optional(),
   "sheetsScriptUrl": zod.string().nullish(),
   "sheetsSpreadsheetId": zod.string().nullish(),
-  "sheetsSheetName": zod.string().nullish()
+  "sheetsSheetName": zod.string().nullish(),
+  "reviewsScriptUrl": zod.string().nullish()
 })
 
 export const UpdateSettingsResponse = zod.object({
@@ -121,7 +123,8 @@ export const UpdateSettingsResponse = zod.object({
 })),
   "sheetsScriptUrl": zod.string().nullish(),
   "sheetsSpreadsheetId": zod.string().nullish(),
-  "sheetsSheetName": zod.string().nullish()
+  "sheetsSheetName": zod.string().nullish(),
+  "reviewsScriptUrl": zod.string().nullish()
 })
 
 

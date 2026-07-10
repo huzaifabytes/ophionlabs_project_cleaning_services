@@ -41,4 +41,6 @@ export interface SettingsInput {
   sheetsSpreadsheetId?: string | null;
   /** @nullable */
   sheetsSheetName?: string | null;
+  /** @nullable */
+  reviewsScriptUrl?: string | null;
 }

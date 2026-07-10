@@ -580,6 +580,8 @@ components:
           type: ["string", "null"]
         sheetsSheetName:
           type: ["string", "null"]
+        reviewsScriptUrl:
+          type: ["string", "null"]
       required: [id, siteName, primaryColor, secondaryColor, fontFamily, navItems, socialLinks]
 
     SettingsInput:
@@ -626,6 +628,8 @@ components:
         sheetsSpreadsheetId:
           type: ["string", "null"]
         sheetsSheetName:
+          type: ["string", "null"]
+        reviewsScriptUrl:
           type: ["string", "null"]
 
     Slide:

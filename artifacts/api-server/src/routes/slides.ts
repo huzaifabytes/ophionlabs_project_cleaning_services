@@ -45,7 +45,7 @@ router.put("/slides/:id", requireAdmin, async (req: Request, res: Response) => {
   try {
     const id = Number(req.params.id);
     const [slide] = await db.update(slidesTable).set(req.body).where(eq(slidesTable.id, id)).returning();
-    if (!slide) return res.status(404).json({ error: "Not found" });
+    if (!slide) { res.status(404).json({ error: "Not found" }); return; }
     res.json(slide);
   } catch (err) {
     req.log.error(err);

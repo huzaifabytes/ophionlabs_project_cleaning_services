@@ -63,6 +63,8 @@ export interface Settings {
   sheetsSpreadsheetId?: string | null;
   /** @nullable */
   sheetsSheetName?: string | null;
+  /** @nullable */
+  reviewsScriptUrl?: string | null;
 }
 
 export interface SettingsInput {
@@ -98,6 +100,8 @@ export interface SettingsInput {
   sheetsSpreadsheetId?: string | null;
   /** @nullable */
   sheetsSheetName?: string | null;
+  /** @nullable */
+  reviewsScriptUrl?: string | null;
 }
 
 export interface Slide {

@@ -33,7 +33,8 @@ const router = Router();
 
 router.post("/upload", requireAdmin, upload.single("file"), (req: Request, res: Response) => {
   if (!req.file) {
-    return res.status(400).json({ error: "No file uploaded" });
+    res.status(400).json({ error: "No file uploaded" });
+    return;
   }
   const url = `/api/uploads/${req.file.filename}`;
   res.json({ url });
